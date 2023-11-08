@@ -1,6 +1,7 @@
 import cv2
+
 from insightface_face_detection import IFRClient
-from yolov8_mobile_detection import mobile_phone_detection, batch_mobile_phone_detection
+from yolov8_mobile_detection import mobile_phone_detection
 
 # Create an instance of the IFRClient class
 client = IFRClient()
@@ -51,34 +52,34 @@ else:
 
                 if face_within_cellphone:
                     label = 'spoof'
-                    print('spoof')
-                    # # Display the label on the frame
-                    # cv2.putText(frame, label, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
-                    # # Draw a box around each face and display it
-                    # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 0, 255), 2)
+                    # print('spoof')
+                    # Display the label on the frame
+                    cv2.putText(frame, label, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+                    # Draw a box around each face and display it
+                    cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 0, 255), 2)
                 else:
                     label = 'real'
-                    print('real')
-                    # # Display the label on the frame
-                    # cv2.putText(frame, label, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-                    # # Draw a box around each face and display it
-                    # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+                    # print('real')
+                    # Display the label on the frame
+                    cv2.putText(frame, label, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                    # Draw a box around each face and display it
+                    cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
 
             else:
                 label = 'real'
-                print('real')
-                # # Display the label on the frame
-                # cv2.putText(frame, label, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-                # # Draw a box around each face and display it
-                # cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+                # print('real')
+                # Display the label on the frame
+                cv2.putText(frame, label, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                # Draw a box around each face and display it
+                cv2.rectangle(frame, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
 
-#         # Display the resulting image
-#         cv2.imshow('frame', frame)
-#
-#         # Press 'q' to quit
-#         if cv2.waitKey(1) & 0xFF == ord('q'):
-#             break
-#
-# # Release the VideoCapture object
-# cap.release()
-# cv2.destroyAllWindows()
+        # Display the resulting image
+        cv2.imshow('frame', frame)
+
+        # Press 'q' to quit
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+# Release the VideoCapture object
+cap.release()
+cv2.destroyAllWindows()
