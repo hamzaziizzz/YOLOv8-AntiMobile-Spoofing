@@ -1,4 +1,5 @@
 import cv2
+import time
 
 from insightface_face_detection import IFRClient
 from yolov8_mobile_detection import mobile_phone_detection
@@ -19,14 +20,17 @@ batch_of_frames = []
 if cap.isOpened() is False:
     print("Unable to read camera feed")
 else:
+    new_frame_time = 0
+    previous_frame_time = 0
     while True:
+        new_frame_time = time.time()
         ret, frame = cap.read()
 
         # Resize the frame
         frame = cv2.resize(frame, (640, 360))
 
-        while len(batch_of_frames) < 8:
-            batch_of_frames.append(frame)
+        # while len(batch_of_frames) < 8:
+        #     batch_of_frames.append(frame)
 
         # Detect mobile phone
         mobile_phone_locations = mobile_phone_detection(frame)
@@ -79,6 +83,10 @@ else:
         # Press 'q' to quit
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+        fps = 1 / (new_frame_time - previous_frame_time)
+        print(f"FPS: {fps}")
+        previous_frame_time = new_frame_time
 
 # Release the VideoCapture object
 cap.release()
